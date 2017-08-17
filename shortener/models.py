@@ -8,8 +8,7 @@ class ShortURLManager(models.Manager):
         qs = qs_main.filter(active=True)
         return qs
 
-    @staticmethod
-    def refresh_short_codes(items=100):
+    def refresh_short_codes(self, items=100):
         qs = ShortURL.objects.filter(id__gte=1)
         if items is not None and isinstance(items, int):
             qs = qs.order_by('-id')[:items]
