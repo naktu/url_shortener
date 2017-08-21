@@ -1,5 +1,8 @@
 from django.db import models
 from .utils import create_short_code
+from django.conf import settings
+
+SHORT_CODE_MAX = getattr(settings, 'SHORT_CODE_MAX', 15)
 
 
 class ShortURLManager(models.Manager):
@@ -23,7 +26,7 @@ class ShortURLManager(models.Manager):
 
 class ShortURL(models.Model):
     url = models.URLField(max_length=2000)
-    short_code = models.CharField(max_length=15, unique=True, blank=True)
+    short_code = models.CharField(max_length=SHORT_CODE_MAX, unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
