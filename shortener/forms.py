@@ -2,4 +2,5 @@ from django import forms
 
 
 class SubmitUrlForm(forms.Form):
-    url = forms.CharField(label='Submit URL')
+    url = forms.URLField(label='Submit URL', widget=forms.widgets.TextInput)
+
