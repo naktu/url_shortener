@@ -18,10 +18,23 @@ class HomeView(View):
     def post(self, request):
         template = 'shortener/home.html'
         form = SubmitUrlForm(request.POST)
-        print(form.is_valid())
+        context = {
+            'title': "Submit URL",
+            'form': form
+        }
         if form.is_valid():
-            print(form.cleaned_data)
-        return render(request, template, {})
+            new_url = form.cleaned_data.get("url")
+            obj, created = ShortURL.objects.get_or_create(url=new_url)
+            context = {
+                'object': obj,
+                'created': created
+            }
+            if created:
+                template = "shortener/success.html"
+            else:
+                template =  "shortener/exists.html"
+
+        return render(request, template, context)
 
 class ShortRedirectView(View):
     def get(self, request, shortcode):
