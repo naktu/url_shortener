@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<p>{{ object.url }}</p>
-<a href="{% url 'scode' object.short_code %}">{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.get_host }}{{ request.object.get_absolute_url }}{% url 'scode' object.short_code %}</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+{{ object.short_code }} | {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    <div class="">
+        <h1>Success!</h1>
+        <p>{{ object.url }}</p>
+        <p><a class="btn btn-primary btn-link" href="{% url 'scode' object.short_code %}">{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.get_host }}{{ request.object.get_absolute_url }}{% url 'scode' object.short_code %}</a></p>
+    <a class="btn btn-default" href="/">New</a>
+    </div>
+
+{% endblock content %}

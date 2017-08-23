@@ -10,7 +10,7 @@ class HomeView(View):
         form = SubmitUrlForm()
         template = 'shortener/home.html'
         context = {
-            'title': "Submit URL",
+            'title': "s.Firr.co",
             'form': form
         }
         return render(request, template, context)
@@ -29,10 +29,7 @@ class HomeView(View):
                 'object': obj,
                 'created': created
             }
-            if created:
-                template = "shortener/success.html"
-            else:
-                template =  "shortener/exists.html"
+            template = "shortener/success.html"
 
         return render(request, template, context)
 
