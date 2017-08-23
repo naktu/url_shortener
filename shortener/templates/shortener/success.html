@@ -6,6 +6,6 @@
 </head>
 <body>
 <p>{{ object.url }}</p>
-<p>{{ object.short_code}}</p>
+<a href="{% url 'scode' object.short_code %}">{% if request.is_secure %}https{% else %}http{% endif %}://{{ request.get_host }}{{ request.object.get_absolute_url }}{% url 'scode' object.short_code %}</a>
 </body>
 </html>
